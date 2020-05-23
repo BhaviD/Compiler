@@ -1,0 +1,2115 @@
+Terminals unused in grammar
+
+   SIGNED
+   COMMA
+   HASH_SYM
+   PARANTHESIS
+   CURLY_BRACET
+   SQUARE_BRACET
+   NOT_OPR
+   NO_MATCH
+
+
+State 25 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: parser $end
+
+    1 parser: StmtList
+
+    2 StmtList: %empty
+    3         | CompoundStmt StmtList
+    4         | SimpleStmt StmtList
+
+    5 SimpleStmt: PrintStmt DELIMITER
+    6           | PrintlnStmt DELIMITER
+    7           | ReturnStmt DELIMITER
+    8           | ContinueStmt DELIMITER
+    9           | BreakStmt DELIMITER
+   10           | IncludeStmt
+   11           | DefineStmt
+   12           | VarDec DELIMITER
+   13           | InputStmt DELIMITER
+   14           | Expr DELIMITER
+
+   15 Atom: IDENTIFIER MultiDim
+   16     | Literal
+
+   17 Literal: BOOL_LIT
+   18        | CHAR_LIT
+   19        | INT_LIT
+   20        | FLOAT_LIT
+   21        | STRING_LIT
+
+   22 PrintStmt: PRINT '(' ExprList ')'
+
+   23 PrintlnStmt: PRINTLN '(' ExprList ')'
+
+   24 ReturnStmt: RETURN Expr
+
+   25 BreakStmt: BREAK
+
+   26 ContinueStmt: CONTINUE
+
+   27 IncludeStmt: '#' INCLUDE IDENTIFIER
+
+   28 DefineStmt: '#' DEFINE IDENTIFIER Literal
+
+   29 InputStmt: INPUT '(' Atom ')'
+
+   30 IdentifierList: IDENTIFIER ',' IdentifierList
+   31               | IDENTIFIER
+
+   32 ParameterList: %empty
+   33              | ',' ParameterList
+   34              | DataType REFERENCE_OPR IDENTIFIER ParameterList
+   35              | DataType IDENTIFIER ParameterList
+
+   36 VarDec: DataType IdentifierList
+
+   37 PrimitiveType: VOID
+   38              | BOOL
+   39              | CHAR
+   40              | INT
+   41              | UNSIGNED
+   42              | FLOAT
+   43              | LONG
+   44              | LL
+   45              | LLU
+   46              | STRING
+
+   47 MultiDim: %empty
+   48         | '[' Expr ']' MultiDim
+
+   49 DataType: PrimitiveType MultiDim
+
+   50 Optr: LOGICAL_OPR
+   51     | RELATIONAL_OPR
+   52     | ARITHMETIC_OPR
+   53     | BITWISE_OPR
+   54     | ASSIGNMENT_OPR
+
+   55 Block: '{' StmtList '}'
+
+   56 FuncCall: IDENTIFIER '(' ExprList ')'
+
+   57 Expr: Atom
+   58     | FuncCall
+   59     | UnaryExpr
+   60     | BinaryExpr
+   61     | TernaryExpr
+   62     | '(' Expr ')'
+
+   63 ExprList: %empty
+   64         | ',' ExprList
+   65         | Expr ExprList
+
+   66 UnaryExpr: '(' ARITHMETIC_OPR Expr ')'
+   67          | '(' LOGICAL_OPR Expr ')'
+
+   68 BinaryExpr: Expr Optr Expr
+
+   69 TernaryExpr: Expr '?' Expr ':' Expr
+
+   70 CompoundStmt: IfStmt
+   71             | ForStmt
+   72             | WhileStmt
+   73             | FuncDef
+
+   74 IfStmt: IF '(' Expr ')' Block ElseBlock
+
+   75 ElseBlock: %empty
+   76          | ELSE Block
+   77          | ELSE IfStmt
+
+   78 ForStmt: FOR '(' Expr DELIMITER Expr DELIMITER IncrementStmt ')' Block
+
+   79 IncrementStmt: %empty
+   80              | Expr
+
+   81 WhileStmt: WHILE '(' Expr ')' Block
+
+   82 FuncDef: DataType IDENTIFIER '(' ParameterList ')' Block
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'#' (35) 27 28
+'(' (40) 22 23 29 56 62 66 67 74 78 81 82
+')' (41) 22 23 29 56 62 66 67 74 78 81 82
+',' (44) 30 33 64
+':' (58) 69
+'?' (63) 69
+'[' (91) 48
+']' (93) 48
+'{' (123) 55
+'}' (125) 55
+error (256)
+BREAK (258) 25
+CONTINUE (259) 26
+INCLUDE (260) 27
+DEFINE (261) 28
+IF (262) 74
+ELSE (263) 76 77
+FOR (264) 78
+WHILE (265) 81
+SIGNED (266)
+UNSIGNED (267) 41
+BOOL (268) 38
+LONG (269) 43
+LL (270) 44
+LLU (271) 45
+RETURN (272) 24
+VOID (273) 37
+PRINT (274) 22
+PRINTLN (275) 23
+INPUT (276) 29
+CHAR (277) 39
+FLOAT (278) 42
+INT (279) 40
+STRING (280) 46
+REFERENCE_OPR (281) 34
+CHAR_LIT (282) 18
+INT_LIT (283) 19
+STRING_LIT (284) 21
+FLOAT_LIT (285) 20
+DELIMITER (286) 5 6 7 8 9 12 13 14 78
+COMMA (287)
+HASH_SYM (288)
+PARANTHESIS (289)
+CURLY_BRACET (290)
+SQUARE_BRACET (291)
+BOOL_LIT (292) 17
+NOT_OPR (293)
+LOGICAL_OPR (294) 50 67
+RELATIONAL_OPR (295) 51
+ARITHMETIC_OPR (296) 52 66
+BITWISE_OPR (297) 53
+ASSIGNMENT_OPR (298) 54
+IDENTIFIER (299) 15 27 28 30 31 34 35 56 82
+NO_MATCH (300)
+TEMP (301)
+
+
+Nonterminals, with rules where they appear
+
+$accept (57)
+    on left: 0
+parser (58)
+    on left: 1, on right: 0
+StmtList (59)
+    on left: 2 3 4, on right: 1 3 4 55
+SimpleStmt (60)
+    on left: 5 6 7 8 9 10 11 12 13 14, on right: 4
+Atom (61)
+    on left: 15 16, on right: 29 57
+Literal (62)
+    on left: 17 18 19 20 21, on right: 16 28
+PrintStmt (63)
+    on left: 22, on right: 5
+PrintlnStmt (64)
+    on left: 23, on right: 6
+ReturnStmt (65)
+    on left: 24, on right: 7
+BreakStmt (66)
+    on left: 25, on right: 9
+ContinueStmt (67)
+    on left: 26, on right: 8
+IncludeStmt (68)
+    on left: 27, on right: 10
+DefineStmt (69)
+    on left: 28, on right: 11
+InputStmt (70)
+    on left: 29, on right: 13
+IdentifierList (71)
+    on left: 30 31, on right: 30 36
+ParameterList (72)
+    on left: 32 33 34 35, on right: 33 34 35 82
+VarDec (73)
+    on left: 36, on right: 12
+PrimitiveType (74)
+    on left: 37 38 39 40 41 42 43 44 45 46, on right: 49
+MultiDim (75)
+    on left: 47 48, on right: 15 48 49
+DataType (76)
+    on left: 49, on right: 34 35 36 82
+Optr (77)
+    on left: 50 51 52 53 54, on right: 68
+Block (78)
+    on left: 55, on right: 74 76 78 81 82
+FuncCall (79)
+    on left: 56, on right: 58
+Expr (80)
+    on left: 57 58 59 60 61 62, on right: 14 24 48 62 65 66 67 68 69
+    74 78 80 81
+ExprList (81)
+    on left: 63 64 65, on right: 22 23 56 64 65
+UnaryExpr (82)
+    on left: 66 67, on right: 59
+BinaryExpr (83)
+    on left: 68, on right: 60
+TernaryExpr (84)
+    on left: 69, on right: 61
+CompoundStmt (85)
+    on left: 70 71 72 73, on right: 3
+IfStmt (86)
+    on left: 74, on right: 70 77
+ElseBlock (87)
+    on left: 75 76 77, on right: 74
+ForStmt (88)
+    on left: 78, on right: 71
+IncrementStmt (89)
+    on left: 79 80, on right: 78
+WhileStmt (90)
+    on left: 81, on right: 72
+FuncDef (91)
+    on left: 82, on right: 73
+
+
+State 0
+
+    0 $accept: . parser $end
+
+    BREAK       shift, and go to state 1
+    CONTINUE    shift, and go to state 2
+    IF          shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    UNSIGNED    shift, and go to state 6
+    BOOL        shift, and go to state 7
+    LONG        shift, and go to state 8
+    LL          shift, and go to state 9
+    LLU         shift, and go to state 10
+    RETURN      shift, and go to state 11
+    VOID        shift, and go to state 12
+    PRINT       shift, and go to state 13
+    PRINTLN     shift, and go to state 14
+    INPUT       shift, and go to state 15
+    CHAR        shift, and go to state 16
+    FLOAT       shift, and go to state 17
+    INT         shift, and go to state 18
+    STRING      shift, and go to state 19
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    '#'         shift, and go to state 27
+
+    $default  reduce using rule 2 (StmtList)
+
+    parser         go to state 28
+    StmtList       go to state 29
+    SimpleStmt     go to state 30
+    Atom           go to state 31
+    Literal        go to state 32
+    PrintStmt      go to state 33
+    PrintlnStmt    go to state 34
+    ReturnStmt     go to state 35
+    BreakStmt      go to state 36
+    ContinueStmt   go to state 37
+    IncludeStmt    go to state 38
+    DefineStmt     go to state 39
+    InputStmt      go to state 40
+    VarDec         go to state 41
+    PrimitiveType  go to state 42
+    DataType       go to state 43
+    FuncCall       go to state 44
+    Expr           go to state 45
+    UnaryExpr      go to state 46
+    BinaryExpr     go to state 47
+    TernaryExpr    go to state 48
+    CompoundStmt   go to state 49
+    IfStmt         go to state 50
+    ForStmt        go to state 51
+    WhileStmt      go to state 52
+    FuncDef        go to state 53
+
+
+State 1
+
+   25 BreakStmt: BREAK .
+
+    $default  reduce using rule 25 (BreakStmt)
+
+
+State 2
+
+   26 ContinueStmt: CONTINUE .
+
+    $default  reduce using rule 26 (ContinueStmt)
+
+
+State 3
+
+   74 IfStmt: IF . '(' Expr ')' Block ElseBlock
+
+    '('  shift, and go to state 54
+
+
+State 4
+
+   78 ForStmt: FOR . '(' Expr DELIMITER Expr DELIMITER IncrementStmt ')' Block
+
+    '('  shift, and go to state 55
+
+
+State 5
+
+   81 WhileStmt: WHILE . '(' Expr ')' Block
+
+    '('  shift, and go to state 56
+
+
+State 6
+
+   41 PrimitiveType: UNSIGNED .
+
+    $default  reduce using rule 41 (PrimitiveType)
+
+
+State 7
+
+   38 PrimitiveType: BOOL .
+
+    $default  reduce using rule 38 (PrimitiveType)
+
+
+State 8
+
+   43 PrimitiveType: LONG .
+
+    $default  reduce using rule 43 (PrimitiveType)
+
+
+State 9
+
+   44 PrimitiveType: LL .
+
+    $default  reduce using rule 44 (PrimitiveType)
+
+
+State 10
+
+   45 PrimitiveType: LLU .
+
+    $default  reduce using rule 45 (PrimitiveType)
+
+
+State 11
+
+   24 ReturnStmt: RETURN . Expr
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 57
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 12
+
+   37 PrimitiveType: VOID .
+
+    $default  reduce using rule 37 (PrimitiveType)
+
+
+State 13
+
+   22 PrintStmt: PRINT . '(' ExprList ')'
+
+    '('  shift, and go to state 58
+
+
+State 14
+
+   23 PrintlnStmt: PRINTLN . '(' ExprList ')'
+
+    '('  shift, and go to state 59
+
+
+State 15
+
+   29 InputStmt: INPUT . '(' Atom ')'
+
+    '('  shift, and go to state 60
+
+
+State 16
+
+   39 PrimitiveType: CHAR .
+
+    $default  reduce using rule 39 (PrimitiveType)
+
+
+State 17
+
+   42 PrimitiveType: FLOAT .
+
+    $default  reduce using rule 42 (PrimitiveType)
+
+
+State 18
+
+   40 PrimitiveType: INT .
+
+    $default  reduce using rule 40 (PrimitiveType)
+
+
+State 19
+
+   46 PrimitiveType: STRING .
+
+    $default  reduce using rule 46 (PrimitiveType)
+
+
+State 20
+
+   18 Literal: CHAR_LIT .
+
+    $default  reduce using rule 18 (Literal)
+
+
+State 21
+
+   19 Literal: INT_LIT .
+
+    $default  reduce using rule 19 (Literal)
+
+
+State 22
+
+   21 Literal: STRING_LIT .
+
+    $default  reduce using rule 21 (Literal)
+
+
+State 23
+
+   20 Literal: FLOAT_LIT .
+
+    $default  reduce using rule 20 (Literal)
+
+
+State 24
+
+   17 Literal: BOOL_LIT .
+
+    $default  reduce using rule 17 (Literal)
+
+
+State 25
+
+   15 Atom: IDENTIFIER . MultiDim
+   56 FuncCall: IDENTIFIER . '(' ExprList ')'
+
+    '('  shift, and go to state 61
+    '['  shift, and go to state 62
+
+    '('       [reduce using rule 47 (MultiDim)]
+    $default  reduce using rule 47 (MultiDim)
+
+    MultiDim  go to state 63
+
+
+State 26
+
+   62 Expr: '(' . Expr ')'
+   66 UnaryExpr: '(' . ARITHMETIC_OPR Expr ')'
+   67          | '(' . LOGICAL_OPR Expr ')'
+
+    CHAR_LIT        shift, and go to state 20
+    INT_LIT         shift, and go to state 21
+    STRING_LIT      shift, and go to state 22
+    FLOAT_LIT       shift, and go to state 23
+    BOOL_LIT        shift, and go to state 24
+    LOGICAL_OPR     shift, and go to state 64
+    ARITHMETIC_OPR  shift, and go to state 65
+    IDENTIFIER      shift, and go to state 25
+    '('             shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 66
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 27
+
+   27 IncludeStmt: '#' . INCLUDE IDENTIFIER
+   28 DefineStmt: '#' . DEFINE IDENTIFIER Literal
+
+    INCLUDE  shift, and go to state 67
+    DEFINE   shift, and go to state 68
+
+
+State 28
+
+    0 $accept: parser . $end
+
+    $end  shift, and go to state 69
+
+
+State 29
+
+    1 parser: StmtList .
+
+    $default  reduce using rule 1 (parser)
+
+
+State 30
+
+    4 StmtList: SimpleStmt . StmtList
+
+    BREAK       shift, and go to state 1
+    CONTINUE    shift, and go to state 2
+    IF          shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    UNSIGNED    shift, and go to state 6
+    BOOL        shift, and go to state 7
+    LONG        shift, and go to state 8
+    LL          shift, and go to state 9
+    LLU         shift, and go to state 10
+    RETURN      shift, and go to state 11
+    VOID        shift, and go to state 12
+    PRINT       shift, and go to state 13
+    PRINTLN     shift, and go to state 14
+    INPUT       shift, and go to state 15
+    CHAR        shift, and go to state 16
+    FLOAT       shift, and go to state 17
+    INT         shift, and go to state 18
+    STRING      shift, and go to state 19
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    '#'         shift, and go to state 27
+
+    $default  reduce using rule 2 (StmtList)
+
+    StmtList       go to state 70
+    SimpleStmt     go to state 30
+    Atom           go to state 31
+    Literal        go to state 32
+    PrintStmt      go to state 33
+    PrintlnStmt    go to state 34
+    ReturnStmt     go to state 35
+    BreakStmt      go to state 36
+    ContinueStmt   go to state 37
+    IncludeStmt    go to state 38
+    DefineStmt     go to state 39
+    InputStmt      go to state 40
+    VarDec         go to state 41
+    PrimitiveType  go to state 42
+    DataType       go to state 43
+    FuncCall       go to state 44
+    Expr           go to state 45
+    UnaryExpr      go to state 46
+    BinaryExpr     go to state 47
+    TernaryExpr    go to state 48
+    CompoundStmt   go to state 49
+    IfStmt         go to state 50
+    ForStmt        go to state 51
+    WhileStmt      go to state 52
+    FuncDef        go to state 53
+
+
+State 31
+
+   57 Expr: Atom .
+
+    $default  reduce using rule 57 (Expr)
+
+
+State 32
+
+   16 Atom: Literal .
+
+    $default  reduce using rule 16 (Atom)
+
+
+State 33
+
+    5 SimpleStmt: PrintStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 71
+
+
+State 34
+
+    6 SimpleStmt: PrintlnStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 72
+
+
+State 35
+
+    7 SimpleStmt: ReturnStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 73
+
+
+State 36
+
+    9 SimpleStmt: BreakStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 74
+
+
+State 37
+
+    8 SimpleStmt: ContinueStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 75
+
+
+State 38
+
+   10 SimpleStmt: IncludeStmt .
+
+    $default  reduce using rule 10 (SimpleStmt)
+
+
+State 39
+
+   11 SimpleStmt: DefineStmt .
+
+    $default  reduce using rule 11 (SimpleStmt)
+
+
+State 40
+
+   13 SimpleStmt: InputStmt . DELIMITER
+
+    DELIMITER  shift, and go to state 76
+
+
+State 41
+
+   12 SimpleStmt: VarDec . DELIMITER
+
+    DELIMITER  shift, and go to state 77
+
+
+State 42
+
+   49 DataType: PrimitiveType . MultiDim
+
+    '['  shift, and go to state 62
+
+    $default  reduce using rule 47 (MultiDim)
+
+    MultiDim  go to state 78
+
+
+State 43
+
+   36 VarDec: DataType . IdentifierList
+   82 FuncDef: DataType . IDENTIFIER '(' ParameterList ')' Block
+
+    IDENTIFIER  shift, and go to state 79
+
+    IdentifierList  go to state 80
+
+
+State 44
+
+   58 Expr: FuncCall .
+
+    $default  reduce using rule 58 (Expr)
+
+
+State 45
+
+   14 SimpleStmt: Expr . DELIMITER
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    DELIMITER       shift, and go to state 81
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+
+    Optr  go to state 88
+
+
+State 46
+
+   59 Expr: UnaryExpr .
+
+    $default  reduce using rule 59 (Expr)
+
+
+State 47
+
+   60 Expr: BinaryExpr .
+
+    $default  reduce using rule 60 (Expr)
+
+
+State 48
+
+   61 Expr: TernaryExpr .
+
+    $default  reduce using rule 61 (Expr)
+
+
+State 49
+
+    3 StmtList: CompoundStmt . StmtList
+
+    BREAK       shift, and go to state 1
+    CONTINUE    shift, and go to state 2
+    IF          shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    UNSIGNED    shift, and go to state 6
+    BOOL        shift, and go to state 7
+    LONG        shift, and go to state 8
+    LL          shift, and go to state 9
+    LLU         shift, and go to state 10
+    RETURN      shift, and go to state 11
+    VOID        shift, and go to state 12
+    PRINT       shift, and go to state 13
+    PRINTLN     shift, and go to state 14
+    INPUT       shift, and go to state 15
+    CHAR        shift, and go to state 16
+    FLOAT       shift, and go to state 17
+    INT         shift, and go to state 18
+    STRING      shift, and go to state 19
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    '#'         shift, and go to state 27
+
+    $default  reduce using rule 2 (StmtList)
+
+    StmtList       go to state 89
+    SimpleStmt     go to state 30
+    Atom           go to state 31
+    Literal        go to state 32
+    PrintStmt      go to state 33
+    PrintlnStmt    go to state 34
+    ReturnStmt     go to state 35
+    BreakStmt      go to state 36
+    ContinueStmt   go to state 37
+    IncludeStmt    go to state 38
+    DefineStmt     go to state 39
+    InputStmt      go to state 40
+    VarDec         go to state 41
+    PrimitiveType  go to state 42
+    DataType       go to state 43
+    FuncCall       go to state 44
+    Expr           go to state 45
+    UnaryExpr      go to state 46
+    BinaryExpr     go to state 47
+    TernaryExpr    go to state 48
+    CompoundStmt   go to state 49
+    IfStmt         go to state 50
+    ForStmt        go to state 51
+    WhileStmt      go to state 52
+    FuncDef        go to state 53
+
+
+State 50
+
+   70 CompoundStmt: IfStmt .
+
+    $default  reduce using rule 70 (CompoundStmt)
+
+
+State 51
+
+   71 CompoundStmt: ForStmt .
+
+    $default  reduce using rule 71 (CompoundStmt)
+
+
+State 52
+
+   72 CompoundStmt: WhileStmt .
+
+    $default  reduce using rule 72 (CompoundStmt)
+
+
+State 53
+
+   73 CompoundStmt: FuncDef .
+
+    $default  reduce using rule 73 (CompoundStmt)
+
+
+State 54
+
+   74 IfStmt: IF '(' . Expr ')' Block ElseBlock
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 90
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 55
+
+   78 ForStmt: FOR '(' . Expr DELIMITER Expr DELIMITER IncrementStmt ')' Block
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 91
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 56
+
+   81 WhileStmt: WHILE '(' . Expr ')' Block
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 92
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 57
+
+   24 ReturnStmt: RETURN Expr .
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+
+    $default  reduce using rule 24 (ReturnStmt)
+
+    Optr  go to state 88
+
+
+State 58
+
+   22 PrintStmt: PRINT '(' . ExprList ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    ','         shift, and go to state 93
+
+    $default  reduce using rule 63 (ExprList)
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 94
+    ExprList     go to state 95
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 59
+
+   23 PrintlnStmt: PRINTLN '(' . ExprList ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    ','         shift, and go to state 93
+
+    $default  reduce using rule 63 (ExprList)
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 94
+    ExprList     go to state 96
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 60
+
+   29 InputStmt: INPUT '(' . Atom ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 97
+
+    Atom     go to state 98
+    Literal  go to state 32
+
+
+State 61
+
+   56 FuncCall: IDENTIFIER '(' . ExprList ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    ','         shift, and go to state 93
+
+    $default  reduce using rule 63 (ExprList)
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 94
+    ExprList     go to state 99
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 62
+
+   48 MultiDim: '[' . Expr ']' MultiDim
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 100
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 63
+
+   15 Atom: IDENTIFIER MultiDim .
+
+    $default  reduce using rule 15 (Atom)
+
+
+State 64
+
+   67 UnaryExpr: '(' LOGICAL_OPR . Expr ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 101
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 65
+
+   66 UnaryExpr: '(' ARITHMETIC_OPR . Expr ')'
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 102
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 66
+
+   62 Expr: '(' Expr . ')'
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ')'             shift, and go to state 103
+
+    Optr  go to state 88
+
+
+State 67
+
+   27 IncludeStmt: '#' INCLUDE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 104
+
+
+State 68
+
+   28 DefineStmt: '#' DEFINE . IDENTIFIER Literal
+
+    IDENTIFIER  shift, and go to state 105
+
+
+State 69
+
+    0 $accept: parser $end .
+
+    $default  accept
+
+
+State 70
+
+    4 StmtList: SimpleStmt StmtList .
+
+    $default  reduce using rule 4 (StmtList)
+
+
+State 71
+
+    5 SimpleStmt: PrintStmt DELIMITER .
+
+    $default  reduce using rule 5 (SimpleStmt)
+
+
+State 72
+
+    6 SimpleStmt: PrintlnStmt DELIMITER .
+
+    $default  reduce using rule 6 (SimpleStmt)
+
+
+State 73
+
+    7 SimpleStmt: ReturnStmt DELIMITER .
+
+    $default  reduce using rule 7 (SimpleStmt)
+
+
+State 74
+
+    9 SimpleStmt: BreakStmt DELIMITER .
+
+    $default  reduce using rule 9 (SimpleStmt)
+
+
+State 75
+
+    8 SimpleStmt: ContinueStmt DELIMITER .
+
+    $default  reduce using rule 8 (SimpleStmt)
+
+
+State 76
+
+   13 SimpleStmt: InputStmt DELIMITER .
+
+    $default  reduce using rule 13 (SimpleStmt)
+
+
+State 77
+
+   12 SimpleStmt: VarDec DELIMITER .
+
+    $default  reduce using rule 12 (SimpleStmt)
+
+
+State 78
+
+   49 DataType: PrimitiveType MultiDim .
+
+    $default  reduce using rule 49 (DataType)
+
+
+State 79
+
+   30 IdentifierList: IDENTIFIER . ',' IdentifierList
+   31               | IDENTIFIER .
+   82 FuncDef: DataType IDENTIFIER . '(' ParameterList ')' Block
+
+    '('  shift, and go to state 106
+    ','  shift, and go to state 107
+
+    $default  reduce using rule 31 (IdentifierList)
+
+
+State 80
+
+   36 VarDec: DataType IdentifierList .
+
+    $default  reduce using rule 36 (VarDec)
+
+
+State 81
+
+   14 SimpleStmt: Expr DELIMITER .
+
+    $default  reduce using rule 14 (SimpleStmt)
+
+
+State 82
+
+   50 Optr: LOGICAL_OPR .
+
+    $default  reduce using rule 50 (Optr)
+
+
+State 83
+
+   51 Optr: RELATIONAL_OPR .
+
+    $default  reduce using rule 51 (Optr)
+
+
+State 84
+
+   52 Optr: ARITHMETIC_OPR .
+
+    $default  reduce using rule 52 (Optr)
+
+
+State 85
+
+   53 Optr: BITWISE_OPR .
+
+    $default  reduce using rule 53 (Optr)
+
+
+State 86
+
+   54 Optr: ASSIGNMENT_OPR .
+
+    $default  reduce using rule 54 (Optr)
+
+
+State 87
+
+   69 TernaryExpr: Expr '?' . Expr ':' Expr
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 108
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 88
+
+   68 BinaryExpr: Expr Optr . Expr
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 109
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 89
+
+    3 StmtList: CompoundStmt StmtList .
+
+    $default  reduce using rule 3 (StmtList)
+
+
+State 90
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   74 IfStmt: IF '(' Expr . ')' Block ElseBlock
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ')'             shift, and go to state 110
+
+    Optr  go to state 88
+
+
+State 91
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   78 ForStmt: FOR '(' Expr . DELIMITER Expr DELIMITER IncrementStmt ')' Block
+
+    DELIMITER       shift, and go to state 111
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+
+    Optr  go to state 88
+
+
+State 92
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   81 WhileStmt: WHILE '(' Expr . ')' Block
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ')'             shift, and go to state 112
+
+    Optr  go to state 88
+
+
+State 93
+
+   64 ExprList: ',' . ExprList
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    ','         shift, and go to state 93
+
+    $default  reduce using rule 63 (ExprList)
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 94
+    ExprList     go to state 113
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 94
+
+   65 ExprList: Expr . ExprList
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    CHAR_LIT        shift, and go to state 20
+    INT_LIT         shift, and go to state 21
+    STRING_LIT      shift, and go to state 22
+    FLOAT_LIT       shift, and go to state 23
+    BOOL_LIT        shift, and go to state 24
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    IDENTIFIER      shift, and go to state 25
+    '('             shift, and go to state 26
+    ','             shift, and go to state 93
+
+    $default  reduce using rule 63 (ExprList)
+
+    Atom         go to state 31
+    Literal      go to state 32
+    Optr         go to state 88
+    FuncCall     go to state 44
+    Expr         go to state 94
+    ExprList     go to state 114
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 95
+
+   22 PrintStmt: PRINT '(' ExprList . ')'
+
+    ')'  shift, and go to state 115
+
+
+State 96
+
+   23 PrintlnStmt: PRINTLN '(' ExprList . ')'
+
+    ')'  shift, and go to state 116
+
+
+State 97
+
+   15 Atom: IDENTIFIER . MultiDim
+
+    '['  shift, and go to state 62
+
+    $default  reduce using rule 47 (MultiDim)
+
+    MultiDim  go to state 63
+
+
+State 98
+
+   29 InputStmt: INPUT '(' Atom . ')'
+
+    ')'  shift, and go to state 117
+
+
+State 99
+
+   56 FuncCall: IDENTIFIER '(' ExprList . ')'
+
+    ')'  shift, and go to state 118
+
+
+State 100
+
+   48 MultiDim: '[' Expr . ']' MultiDim
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ']'             shift, and go to state 119
+
+    Optr  go to state 88
+
+
+State 101
+
+   67 UnaryExpr: '(' LOGICAL_OPR Expr . ')'
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ')'             shift, and go to state 120
+
+    Optr  go to state 88
+
+
+State 102
+
+   66 UnaryExpr: '(' ARITHMETIC_OPR Expr . ')'
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ')'             shift, and go to state 121
+
+    Optr  go to state 88
+
+
+State 103
+
+   62 Expr: '(' Expr ')' .
+
+    $default  reduce using rule 62 (Expr)
+
+
+State 104
+
+   27 IncludeStmt: '#' INCLUDE IDENTIFIER .
+
+    $default  reduce using rule 27 (IncludeStmt)
+
+
+State 105
+
+   28 DefineStmt: '#' DEFINE IDENTIFIER . Literal
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+
+    Literal  go to state 122
+
+
+State 106
+
+   82 FuncDef: DataType IDENTIFIER '(' . ParameterList ')' Block
+
+    UNSIGNED  shift, and go to state 6
+    BOOL      shift, and go to state 7
+    LONG      shift, and go to state 8
+    LL        shift, and go to state 9
+    LLU       shift, and go to state 10
+    VOID      shift, and go to state 12
+    CHAR      shift, and go to state 16
+    FLOAT     shift, and go to state 17
+    INT       shift, and go to state 18
+    STRING    shift, and go to state 19
+    ','       shift, and go to state 123
+
+    $default  reduce using rule 32 (ParameterList)
+
+    ParameterList  go to state 124
+    PrimitiveType  go to state 42
+    DataType       go to state 125
+
+
+State 107
+
+   30 IdentifierList: IDENTIFIER ',' . IdentifierList
+
+    IDENTIFIER  shift, and go to state 126
+
+    IdentifierList  go to state 127
+
+
+State 108
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   69            | Expr '?' Expr . ':' Expr
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+    ':'             shift, and go to state 128
+
+    Optr  go to state 88
+
+
+State 109
+
+   68 BinaryExpr: Expr . Optr Expr
+   68           | Expr Optr Expr .
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+
+    $default  reduce using rule 68 (BinaryExpr)
+
+    Optr  go to state 88
+
+
+State 110
+
+   74 IfStmt: IF '(' Expr ')' . Block ElseBlock
+
+    '{'  shift, and go to state 129
+
+    Block  go to state 130
+
+
+State 111
+
+   78 ForStmt: FOR '(' Expr DELIMITER . Expr DELIMITER IncrementStmt ')' Block
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 131
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 112
+
+   81 WhileStmt: WHILE '(' Expr ')' . Block
+
+    '{'  shift, and go to state 129
+
+    Block  go to state 132
+
+
+State 113
+
+   64 ExprList: ',' ExprList .
+
+    $default  reduce using rule 64 (ExprList)
+
+
+State 114
+
+   65 ExprList: Expr ExprList .
+
+    $default  reduce using rule 65 (ExprList)
+
+
+State 115
+
+   22 PrintStmt: PRINT '(' ExprList ')' .
+
+    $default  reduce using rule 22 (PrintStmt)
+
+
+State 116
+
+   23 PrintlnStmt: PRINTLN '(' ExprList ')' .
+
+    $default  reduce using rule 23 (PrintlnStmt)
+
+
+State 117
+
+   29 InputStmt: INPUT '(' Atom ')' .
+
+    $default  reduce using rule 29 (InputStmt)
+
+
+State 118
+
+   56 FuncCall: IDENTIFIER '(' ExprList ')' .
+
+    $default  reduce using rule 56 (FuncCall)
+
+
+State 119
+
+   48 MultiDim: '[' Expr ']' . MultiDim
+
+    '['  shift, and go to state 62
+
+    $default  reduce using rule 47 (MultiDim)
+
+    MultiDim  go to state 133
+
+
+State 120
+
+   67 UnaryExpr: '(' LOGICAL_OPR Expr ')' .
+
+    $default  reduce using rule 67 (UnaryExpr)
+
+
+State 121
+
+   66 UnaryExpr: '(' ARITHMETIC_OPR Expr ')' .
+
+    $default  reduce using rule 66 (UnaryExpr)
+
+
+State 122
+
+   28 DefineStmt: '#' DEFINE IDENTIFIER Literal .
+
+    $default  reduce using rule 28 (DefineStmt)
+
+
+State 123
+
+   33 ParameterList: ',' . ParameterList
+
+    UNSIGNED  shift, and go to state 6
+    BOOL      shift, and go to state 7
+    LONG      shift, and go to state 8
+    LL        shift, and go to state 9
+    LLU       shift, and go to state 10
+    VOID      shift, and go to state 12
+    CHAR      shift, and go to state 16
+    FLOAT     shift, and go to state 17
+    INT       shift, and go to state 18
+    STRING    shift, and go to state 19
+    ','       shift, and go to state 123
+
+    $default  reduce using rule 32 (ParameterList)
+
+    ParameterList  go to state 134
+    PrimitiveType  go to state 42
+    DataType       go to state 125
+
+
+State 124
+
+   82 FuncDef: DataType IDENTIFIER '(' ParameterList . ')' Block
+
+    ')'  shift, and go to state 135
+
+
+State 125
+
+   34 ParameterList: DataType . REFERENCE_OPR IDENTIFIER ParameterList
+   35              | DataType . IDENTIFIER ParameterList
+
+    REFERENCE_OPR  shift, and go to state 136
+    IDENTIFIER     shift, and go to state 137
+
+
+State 126
+
+   30 IdentifierList: IDENTIFIER . ',' IdentifierList
+   31               | IDENTIFIER .
+
+    ','  shift, and go to state 107
+
+    $default  reduce using rule 31 (IdentifierList)
+
+
+State 127
+
+   30 IdentifierList: IDENTIFIER ',' IdentifierList .
+
+    $default  reduce using rule 30 (IdentifierList)
+
+
+State 128
+
+   69 TernaryExpr: Expr '?' Expr ':' . Expr
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    Atom         go to state 31
+    Literal      go to state 32
+    FuncCall     go to state 44
+    Expr         go to state 138
+    UnaryExpr    go to state 46
+    BinaryExpr   go to state 47
+    TernaryExpr  go to state 48
+
+
+State 129
+
+   55 Block: '{' . StmtList '}'
+
+    BREAK       shift, and go to state 1
+    CONTINUE    shift, and go to state 2
+    IF          shift, and go to state 3
+    FOR         shift, and go to state 4
+    WHILE       shift, and go to state 5
+    UNSIGNED    shift, and go to state 6
+    BOOL        shift, and go to state 7
+    LONG        shift, and go to state 8
+    LL          shift, and go to state 9
+    LLU         shift, and go to state 10
+    RETURN      shift, and go to state 11
+    VOID        shift, and go to state 12
+    PRINT       shift, and go to state 13
+    PRINTLN     shift, and go to state 14
+    INPUT       shift, and go to state 15
+    CHAR        shift, and go to state 16
+    FLOAT       shift, and go to state 17
+    INT         shift, and go to state 18
+    STRING      shift, and go to state 19
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+    '#'         shift, and go to state 27
+
+    $default  reduce using rule 2 (StmtList)
+
+    StmtList       go to state 139
+    SimpleStmt     go to state 30
+    Atom           go to state 31
+    Literal        go to state 32
+    PrintStmt      go to state 33
+    PrintlnStmt    go to state 34
+    ReturnStmt     go to state 35
+    BreakStmt      go to state 36
+    ContinueStmt   go to state 37
+    IncludeStmt    go to state 38
+    DefineStmt     go to state 39
+    InputStmt      go to state 40
+    VarDec         go to state 41
+    PrimitiveType  go to state 42
+    DataType       go to state 43
+    FuncCall       go to state 44
+    Expr           go to state 45
+    UnaryExpr      go to state 46
+    BinaryExpr     go to state 47
+    TernaryExpr    go to state 48
+    CompoundStmt   go to state 49
+    IfStmt         go to state 50
+    ForStmt        go to state 51
+    WhileStmt      go to state 52
+    FuncDef        go to state 53
+
+
+State 130
+
+   74 IfStmt: IF '(' Expr ')' Block . ElseBlock
+
+    ELSE  shift, and go to state 140
+
+    $default  reduce using rule 75 (ElseBlock)
+
+    ElseBlock  go to state 141
+
+
+State 131
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   78 ForStmt: FOR '(' Expr DELIMITER Expr . DELIMITER IncrementStmt ')' Block
+
+    DELIMITER       shift, and go to state 142
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+
+    Optr  go to state 88
+
+
+State 132
+
+   81 WhileStmt: WHILE '(' Expr ')' Block .
+
+    $default  reduce using rule 81 (WhileStmt)
+
+
+State 133
+
+   48 MultiDim: '[' Expr ']' MultiDim .
+
+    $default  reduce using rule 48 (MultiDim)
+
+
+State 134
+
+   33 ParameterList: ',' ParameterList .
+
+    $default  reduce using rule 33 (ParameterList)
+
+
+State 135
+
+   82 FuncDef: DataType IDENTIFIER '(' ParameterList ')' . Block
+
+    '{'  shift, and go to state 129
+
+    Block  go to state 143
+
+
+State 136
+
+   34 ParameterList: DataType REFERENCE_OPR . IDENTIFIER ParameterList
+
+    IDENTIFIER  shift, and go to state 144
+
+
+State 137
+
+   35 ParameterList: DataType IDENTIFIER . ParameterList
+
+    UNSIGNED  shift, and go to state 6
+    BOOL      shift, and go to state 7
+    LONG      shift, and go to state 8
+    LL        shift, and go to state 9
+    LLU       shift, and go to state 10
+    VOID      shift, and go to state 12
+    CHAR      shift, and go to state 16
+    FLOAT     shift, and go to state 17
+    INT       shift, and go to state 18
+    STRING    shift, and go to state 19
+    ','       shift, and go to state 123
+
+    $default  reduce using rule 32 (ParameterList)
+
+    ParameterList  go to state 145
+    PrimitiveType  go to state 42
+    DataType       go to state 125
+
+
+State 138
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   69            | Expr '?' Expr ':' Expr .
+
+    '?'  shift, and go to state 87
+
+    $default  reduce using rule 69 (TernaryExpr)
+
+    Optr  go to state 88
+
+
+State 139
+
+   55 Block: '{' StmtList . '}'
+
+    '}'  shift, and go to state 146
+
+
+State 140
+
+   76 ElseBlock: ELSE . Block
+   77          | ELSE . IfStmt
+
+    IF   shift, and go to state 3
+    '{'  shift, and go to state 129
+
+    Block   go to state 147
+    IfStmt  go to state 148
+
+
+State 141
+
+   74 IfStmt: IF '(' Expr ')' Block ElseBlock .
+
+    $default  reduce using rule 74 (IfStmt)
+
+
+State 142
+
+   78 ForStmt: FOR '(' Expr DELIMITER Expr DELIMITER . IncrementStmt ')' Block
+
+    CHAR_LIT    shift, and go to state 20
+    INT_LIT     shift, and go to state 21
+    STRING_LIT  shift, and go to state 22
+    FLOAT_LIT   shift, and go to state 23
+    BOOL_LIT    shift, and go to state 24
+    IDENTIFIER  shift, and go to state 25
+    '('         shift, and go to state 26
+
+    $default  reduce using rule 79 (IncrementStmt)
+
+    Atom           go to state 31
+    Literal        go to state 32
+    FuncCall       go to state 44
+    Expr           go to state 149
+    UnaryExpr      go to state 46
+    BinaryExpr     go to state 47
+    TernaryExpr    go to state 48
+    IncrementStmt  go to state 150
+
+
+State 143
+
+   82 FuncDef: DataType IDENTIFIER '(' ParameterList ')' Block .
+
+    $default  reduce using rule 82 (FuncDef)
+
+
+State 144
+
+   34 ParameterList: DataType REFERENCE_OPR IDENTIFIER . ParameterList
+
+    UNSIGNED  shift, and go to state 6
+    BOOL      shift, and go to state 7
+    LONG      shift, and go to state 8
+    LL        shift, and go to state 9
+    LLU       shift, and go to state 10
+    VOID      shift, and go to state 12
+    CHAR      shift, and go to state 16
+    FLOAT     shift, and go to state 17
+    INT       shift, and go to state 18
+    STRING    shift, and go to state 19
+    ','       shift, and go to state 123
+
+    $default  reduce using rule 32 (ParameterList)
+
+    ParameterList  go to state 151
+    PrimitiveType  go to state 42
+    DataType       go to state 125
+
+
+State 145
+
+   35 ParameterList: DataType IDENTIFIER ParameterList .
+
+    $default  reduce using rule 35 (ParameterList)
+
+
+State 146
+
+   55 Block: '{' StmtList '}' .
+
+    $default  reduce using rule 55 (Block)
+
+
+State 147
+
+   76 ElseBlock: ELSE Block .
+
+    $default  reduce using rule 76 (ElseBlock)
+
+
+State 148
+
+   77 ElseBlock: ELSE IfStmt .
+
+    $default  reduce using rule 77 (ElseBlock)
+
+
+State 149
+
+   68 BinaryExpr: Expr . Optr Expr
+   69 TernaryExpr: Expr . '?' Expr ':' Expr
+   80 IncrementStmt: Expr .
+
+    LOGICAL_OPR     shift, and go to state 82
+    RELATIONAL_OPR  shift, and go to state 83
+    ARITHMETIC_OPR  shift, and go to state 84
+    BITWISE_OPR     shift, and go to state 85
+    ASSIGNMENT_OPR  shift, and go to state 86
+    '?'             shift, and go to state 87
+
+    $default  reduce using rule 80 (IncrementStmt)
+
+    Optr  go to state 88
+
+
+State 150
+
+   78 ForStmt: FOR '(' Expr DELIMITER Expr DELIMITER IncrementStmt . ')' Block
+
+    ')'  shift, and go to state 152
+
+
+State 151
+
+   34 ParameterList: DataType REFERENCE_OPR IDENTIFIER ParameterList .
+
+    $default  reduce using rule 34 (ParameterList)
+
+
+State 152
+
+   78 ForStmt: FOR '(' Expr DELIMITER Expr DELIMITER IncrementStmt ')' . Block
+
+    '{'  shift, and go to state 129
+
+    Block  go to state 153
+
+
+State 153
+
+   78 ForStmt: FOR '(' Expr DELIMITER Expr DELIMITER IncrementStmt ')' Block .
+
+    $default  reduce using rule 78 (ForStmt)

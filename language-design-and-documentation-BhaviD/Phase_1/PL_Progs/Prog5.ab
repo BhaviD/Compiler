@@ -1,0 +1,43 @@
+void Combinations(int arr, int n, int l, int r)
+{
+    if(l==r){
+        int i;
+        for(i=0;i<n;i+=1)
+        {
+            print(arr[i]);
+            print(",");
+        }
+        print(" ");
+    }
+    else{
+        int i;
+        for(i=l;i<=r;i+=1) 
+        {
+            int  temp;
+            temp = arr[l];
+            arr[l] = arr[i];
+            arr[i] = temp;
+            Combinations(arr,n,l+1,r);
+            temp = arr[l];
+            arr[l] = arr[i];
+            arr[i] = temp;
+        }
+    }
+}
+
+int main()
+{
+    int N;
+    print("Enter the value of N: ");
+    input(N);
+    int[N] arr;
+    int i;
+    for(i=0;i<N;i+=1)
+    {
+        arr[i] = (i+1);
+    }
+    println("The combinations are: ");
+    Combinations(arr,N,0,N-1);
+    println();
+    return 0;
+}

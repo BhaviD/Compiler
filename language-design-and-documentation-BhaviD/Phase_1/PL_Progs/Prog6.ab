@@ -1,0 +1,38 @@
+void swap(int&& a, int&& b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+int main()
+{
+    int n;
+    print ("Enter the size of array: ");
+    input (n);
+
+    int[n] arr;
+    println ("Enter the values:");
+    int i;
+    for (i = 0; i < n; i += 1)
+    {
+        input (arr[i]);
+    }
+
+    int i, j;
+    for (j = 1; j < n; j += 1)
+    {
+        for (i = j-1; (i >= 0) and (arr[i] > arr[i+1]); i -= 1)
+        {
+            swap(arr[i], arr[i+1]);
+        }
+    }
+    println ("After Insertion Sort:");
+    for (i = 0; i < n; i += 1)
+    {
+        print (arr[i],);
+    }
+    println ();
+    return 0;
+}

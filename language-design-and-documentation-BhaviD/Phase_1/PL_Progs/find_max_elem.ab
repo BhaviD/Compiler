@@ -1,0 +1,28 @@
+#define INT_MIN 0
+
+int main()
+{
+    int n;
+    print ("Enter the size of array: ");
+    input (n);
+
+    int[n] arr;
+    println ("Enter the values:");
+    int i;
+    for (i = 0; i < n; i += 1)
+    {
+        input (arr[i]);
+    }
+
+    int max_elem;
+    max_elem = INT_MIN;
+    for (i = 0; i < n; i += 1)
+    {
+        if (arr[i] > max_elem)
+        {
+            max_elem = arr[i];
+        }
+    }
+    println ("Max. element: ", max_elem);
+    return 0;
+}

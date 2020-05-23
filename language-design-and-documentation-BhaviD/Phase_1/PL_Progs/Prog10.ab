@@ -1,0 +1,64 @@
+int main ()
+{
+    int A_m, A_n;
+    print ("Enter dimensions of matrix A: ");
+    input (A_m);
+    input (A_n);
+    int[A_m][A_n] A;
+    println ("Enter values of matrix A:");
+    int i, j;
+    for (i = 0; i < A_m; i += 1)
+    {
+        for (j = 0; j < A_n; j += 1)
+        {
+            input (A[i][j]);
+        }
+    }
+
+    int B_m, B_n;
+    println ();
+    print ("Enter dimensions of matrix B: ");
+    input (B_m);
+    input (B_n);
+    int[B_m][B_n] B;
+    println ("Enter values of matrix B:");
+    for (i = 0; i < B_m; i += 1)
+    {
+        for (j = 0; j < B_n; j += 1)
+        {
+            input (B[i][j]);
+        }
+    }
+
+    if (A_n != B_m)
+    {
+        println("The matrices are not compatible for multiplication!!");
+        return 1;
+    }
+
+    int[A_m][B_n] C;
+    for (i = 0; i < A_m; i += 1)
+    {
+        for (j = 0; j < B_n; j += 1)
+        {
+            int k;
+            C[i][j] = 0;
+            for (k = 0; k < A_n; k += 1)
+            {
+                C[i][j] += A[i][k] * B[k][j];
+            }
+        }
+    }
+
+    println();
+    println ("A x B: ");
+    for (i = 0; i < A_m; i += 1)
+    {
+        for (j = 0; j < B_n; j += 1)
+        {
+            print (C[i][j],);
+        }
+        println();
+    }
+    return 0;
+}

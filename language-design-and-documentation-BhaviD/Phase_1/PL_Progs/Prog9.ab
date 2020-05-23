@@ -1,0 +1,48 @@
+int main()
+{
+    int n;
+    int m;
+    print("Enter the number of rows of the matrices: ");
+    input(m);
+    print("Enter the number of columns of the matrices: ");
+    input(n);
+    int[m][n] mat1;
+    int[m][n] mat2;
+    print("Enter the elements of first matrix");
+    int i;
+    int j;
+    for(i=0;i<m;i+=1)
+    {
+        for(j=0;j<n;j+=1)
+        {
+            input(mat1[i][j]);
+        }
+    }
+    print("Enter the elements of second matrix");
+    for(i=0;i<m;i+=1) 
+    {
+        for(j=0;j<n;j+=1)
+        {
+            input(mat2[i][j]);
+        }
+    }
+    int[m][n] sum_mat;
+    for(i=0;i<m;i+=1) 
+    {
+        for(j=0;j<n;j+=1) 
+        {
+            sum_mat[i][j] = mat1[i][j] + mat2[i][j];
+        }
+    }
+    print("The sum of the matrices is");
+    for(i=0;i<m;i+=1)
+    {
+        for(j=0;j<n;j+=1) 
+        {
+            print(sum_mat[i][j]);
+            print(" ");
+        }
+        println();
+    }
+    return 0;
+}

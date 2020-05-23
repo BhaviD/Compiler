@@ -1,0 +1,35 @@
+int main()
+{
+    int N;
+    print("Enter the value of N: ");
+    input(N);
+    bool[N] parr;
+    parr[0] = false;
+    parr[0] = false;
+    int i;
+    for(i=2;i<N;i+=1) 
+    {
+        parr[i] = true;
+    }
+    for(i=2;i<N;i+=1) 
+    {
+        if(parr[i]==true){
+            int j;
+            for(j=2*i;j<N;j+=i) 
+            {
+                parr[j] = false;
+            }
+        }
+    }
+    int sum;
+    sum = 0;
+    for(i=2;i<N;i+=1)
+    {
+        if(parr[i]==true){
+            sum = sum + i;
+        }
+    }
+    print("The sum of all primes strictly less than N = ");
+    println(sum);
+    return 0;
+}

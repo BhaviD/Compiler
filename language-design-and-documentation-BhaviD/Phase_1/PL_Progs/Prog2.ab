@@ -1,0 +1,29 @@
+bool is_prime(int n)
+{
+    int i;
+    for (i = 2; i*i <= n; i += 1)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int n;
+    input(n);
+
+    print (n);
+    if (is_prime(n))
+    {
+        println (" is a prime number");
+    }
+    else
+    {
+        println (" is not a prime number");
+    }
+    return 0;
+}

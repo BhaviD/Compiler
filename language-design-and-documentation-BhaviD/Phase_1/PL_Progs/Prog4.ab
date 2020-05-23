@@ -1,0 +1,22 @@
+int main()
+{
+    unsigned long long a, b, c, m, n;
+
+    int d;
+    for (d = 1; d < 100000000/2; d += 1)
+    {
+        for (n = 1; n < 100000000/2; n += 1)
+        {
+            m = n+d;
+            c = m*m + n*n;
+            if (c > 100000000)
+            {
+                break;
+            }
+            a = m*m - n*n;
+            b = 2*m*n;
+            println ("(", a, ",", b, ",", c, ")");
+        }
+    }
+    return 0;
+}

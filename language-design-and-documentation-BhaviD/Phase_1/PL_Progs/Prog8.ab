@@ -1,0 +1,70 @@
+#define INT_MAX 1000000007
+
+void merge(int[n]&& arr, int i, int m, int j)
+{
+    int[m-i+1 + 1] arr1;
+    int[j-m + 1] arr2;
+    arr1[m-i+1] = arr2[j-m] = INT_MAX;
+
+    int k;
+    for (k = 0; k < (m-i+1); k += 1)
+    {
+        arr1[k] = arr[i+k];
+    }
+    for (k = 0; k < (j-m); k += 1)
+    {
+        arr2[k] = arr[m+k+1];
+    }
+    int p, q;
+    p = 0;
+    q = 0;
+    for (k = i; k <= j; k += 1)
+    {
+        if (arr1[p] < arr2[q])
+        {
+            arr[k] = arr1[p];
+            p += 1;
+        }
+        else
+        {
+            arr[k] = arr2[q];
+            q += 1;
+        }
+    }
+}
+
+void merge_sort(int[n]&& arr, int n, int i, int j)
+{
+    if (i < j)
+    {
+        int m;
+        m = (i + ((j-i)/2));
+        merge_sort(arr, n, i, m);
+        merge_sort(arr, n, m+1, j);
+        merge(arr, i, m, j);
+    }
+}
+
+int main()
+{
+    int n;
+    print ("Enter the size of array: ");
+    input (n);
+
+    int[n] arr;
+    println ("Enter the values:");
+    int i;
+    for (i = 0; i < n; i += 1)
+    {
+        input (arr[i]);
+    }
+
+    merge_sort(arr, n, 0, n-1);
+    println ("After Merge Sort: ");
+    for (i = 0; i < n; i += 1)
+    {
+        print (arr[i],);
+    }
+    println ();
+    return 0;
+}
